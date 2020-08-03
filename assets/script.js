@@ -1,7 +1,22 @@
 
-var url = "http://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=439d4b804bc8187953eb36d2a8c26a02";
+// $(document).ready(function() {
+//     $("#getWeatherForecast").click(function() {
+//         var city = "New york city";
+//         var key = "8795bea27268cd8044a6ed0bd28e7b66";
+function ready() {
+    var city ="new york city";
+    var key = "8795bea27268cd8044a6ed0bd28e7b66";
+        $.ajax({
+            url: "api.openweathermap.org/data/2.5/weather",
+            dataType: "json",
+            type: "GET",
+            data: {q:city, appid: key, units: "metric"},
 
-$.getJSON(url, function(data) {
-    console.log(data);
-});
-
+            sucess: function(data){
+                console.log(data);
+            }
+        });
+    };
+    ready();
+//     });
+// });
