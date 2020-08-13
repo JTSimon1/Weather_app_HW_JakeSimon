@@ -62,30 +62,41 @@ You are required to submit the following for review:
 </head>
 <body>
     
+    <div class ="header">
+        Weather Dashboard
+    </div>
     <div class="container">
-        <div class ="header">
-            Weather Dashboard
-        </div>
 
         <div class="dashboard">
-            <div class="search">
+            <div class="row">
+
+
+                <div class="col-md">
+            <div>
                 <label>Search for a City:</label>
                 <input type="text" id="city" placeholder="New York City">
                     <button id="submit" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </div>
-            <div id="cities" class="cities">
+
+            <div id="cities">
                 <ul>
                     <li>
                         Houston
                     </li>
                 </ul>
             </div>
-            <div id="weather">
+
+        </div>
+
+            <div class="col-md" id="weather">
 
             </div>
+        </div>
 
-            <div id="forecast">
-                5-Day Forecast:
+            <div class="row">
+                <h1>5 Day Forecast: </h1>
+            </div>
+            <div id="forecast" class="row">
             </div>
 
         </div>
