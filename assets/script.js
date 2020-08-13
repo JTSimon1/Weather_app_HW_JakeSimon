@@ -1,43 +1,122 @@
+// var city = document.getElementById('city').value;
+$("#submit").on('click', ()=> {
+
+    // empty the divs when the button is clicked 
+    $("#forecast").empty();
+    $("#weather").empty();
 
 
-$("#submit").on("click", () => {
-    console.log("clicked");
-    const city = "morristown";
 
-    const url = 5;
-    
+var city = document.getElementById("city").value;
+var url = "http://api.openweathermap.org/data/2.5/forecast?q="+ city+"&appid=8795bea27268cd8044a6ed0bd28e7b66";
+localStorage.setItem(city, url);
 
-    $.ajax({
-        url: "https://pro.openweathermap.org/data/2.5/forecast/climate?q=London&appid=7097e639f6d1ffdf69045c02287980e4",
-        method: "GET"
-    }).then((response) => {
-        console.log(response)
+
+let liVar = document.createElement('a');
+let liText = document.createTextNode(city);
+liVar.append(liText);
+liVar.setAttribute("id", "enteredCity");
+$("#cities").append(liVar);
+
+
+$.getJSON(url, function(data) {
+    data = JSON.stringify(data);
+    data = JSON.parse(data);
+    console.log(data);
+
+
+    for (i=0; i<6; i++) {
+        let weather = data.list[i].main;
         let newDiv = document.createElement('div');
-        let para = document.createElement('p');
-        let hTag = document.createElement("h1");
+        let para1 = document.createElement('p');
+        let para2 = document.createElement('p');
+        let para3 = document.createElement('p');
+        let para4 = document.createElement('p');
+        let hTag = document.createElement("h2");
 
-        for (i=0; i<6; i++) {
+        if (i===0) {
+            // h tag elements
+            let Day =document.createTextNode("Today");
+            hTag.append(Day);
+            newDiv.append(hTag);
 
-            if (i===0) {
-                let Day =document.createTextNode("Today");
-                hTag.append(Day);
-                newDiv.append(hTag);
-                $("#weather").append(newDiv);
-                let feelsLike = response
-            }
-            else {
-                let Day = document.createTextNode("Day"+(i+1))
-                hTag.append(Day);
-                newDiv.append(hTag);
-                $("#forecast").append(newDiv);
-            }
+            // p tag elements
+
+            // Feels like
+            let feelsLike = Math.round((weather.feels_like-273)+32*(9/5));
+            let textNode = document.createTextNode("Feels Like: " + feelsLike);
+            para1.append(textNode);
+            newDiv.append(para1);
+            
+
+            // max p tag elements
+
+            let max = Math.round((weather.temp_max-273)+32*(9/5));
+            let maxText = document.createTextNode("Max Temperature: "+max);
+            para2.append(maxText);
+            newDiv.append(para2);
+
+            // min 
+
+            let min = Math.round((weather.temp_min-273)+32*(9/5));
+            let minText = document.createTextNode("Min Temperature: "+min);
+            para3.append(minText);
+            newDiv.append(para3);
+            // humidity
+
+            let hum = weather.humidity;
+            let humText = document.createTextNode("Humidity: "+hum+"%");
+            para4.append(humText);
+            newDiv.append(para4);
+
+            newDiv.classList.add('forecast');
+
+            $("#weather").append(newDiv);
         }
-    })
+        else {
+            let Day = document.createTextNode("Day "+(i+1)+":")
+            let hTag = document.createElement('h2');
+            hTag.append(Day);
+            newDiv.append(hTag);
+
+                        // p tag elements
+
+            // Feels like
+            let feelsLike = Math.round((weather.feels_like-273)+32*(9/5));
+            let textNode = document.createTextNode("Feels Like: " + feelsLike);
+            para1.append(textNode);
+            newDiv.append(para1);
+            
+
+            // max p tag elements
+
+            let max = Math.round((weather.temp_max-273)+32*(9/5));
+            let maxText = document.createTextNode("Max Temperature: "+max);
+            para2.append(maxText);
+            newDiv.append(para2);
+
+            // min 
+
+            let min = Math.round((weather.temp_min-273)+32*(9/5));
+            let minText = document.createTextNode("Min Temperature: "+min);
+            para3.append(minText);
+            newDiv.append(para3);
+            // humidity
+
+            let hum = weather.humidity;
+            let humText = document.createTextNode("Humidity: "+hum+"%");
+            para4.append(humText);
+            newDiv.append(para4);
+
+            newDiv.classList.add('col-sm');
+            newDiv.classList.add('forecast');
+           
+
+            $("#forecast").append(newDiv);
+        }
+    }
 });
-pro.openweathermap.org/data/2.5/forecast/hourly?q=London&appid=7097e639f6d1ffdf69045c02287980e4
-
-api.openweathermap.org/data/2.5/forecast/daily?q=London&cnt=7&appid=8795bea27268cd8044a6ed0bd28e7b66
-
+});
 
 
 
