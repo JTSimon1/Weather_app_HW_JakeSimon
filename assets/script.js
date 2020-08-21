@@ -1,3 +1,8 @@
+
+const inpKey = document.getElementById('city');
+
+
+
 // var city = document.getElementById('city').value;
 $("#submit").on('click', ()=> {
 
@@ -5,11 +10,21 @@ $("#submit").on('click', ()=> {
     $("#forecast").empty();
     $("#weather").empty();
 
+    // local storage stuff
+
+    const key = inpKey.value;
+
+    console.log(key);
+
+
+
 
 
 var city = document.getElementById("city").value;
 var url = "http://api.openweathermap.org/data/2.5/forecast?q="+ city+"&appid=8795bea27268cd8044a6ed0bd28e7b66";
 localStorage.setItem(city, url);
+localStorage.getItem(city)
+
 
 
 let liVar = document.createElement('a');
@@ -43,7 +58,7 @@ $.getJSON(url, function(data) {
             // p tag elements
 
             // Feels like
-            let feelsLike = Math.round((weather.feels_like-273)+32*(9/5));
+            let feelsLike = Math.round((weather.feels_like-273)*(9/5)+32);
             let textNode = document.createTextNode("Feels Like: " + feelsLike);
             para1.append(textNode);
             newDiv.append(para1);
@@ -51,14 +66,14 @@ $.getJSON(url, function(data) {
 
             // max p tag elements
 
-            let max = Math.round((weather.temp_max-273)+32*(9/5));
+            let max = Math.round((weather.temp_max-273)*(9/5)+32);
             let maxText = document.createTextNode("Max Temperature: "+max);
             para2.append(maxText);
             newDiv.append(para2);
 
             // min 
 
-            let min = Math.round((weather.temp_min-273)+32*(9/5));
+            let min = Math.round((weather.temp_min-273)*(9/5)+32);
             let minText = document.createTextNode("Min Temperature: "+min);
             para3.append(minText);
             newDiv.append(para3);
@@ -82,7 +97,7 @@ $.getJSON(url, function(data) {
                         // p tag elements
 
             // Feels like
-            let feelsLike = Math.round((weather.feels_like-273)+32*(9/5));
+            let feelsLike = Math.round((weather.feels_like-273)*(9/5)+32);
             let textNode = document.createTextNode("Feels Like: " + feelsLike);
             para1.append(textNode);
             newDiv.append(para1);
@@ -90,14 +105,14 @@ $.getJSON(url, function(data) {
 
             // max p tag elements
 
-            let max = Math.round((weather.temp_max-273)+32*(9/5));
+            let max = Math.round((weather.temp_max-273)*(9/5)+32);
             let maxText = document.createTextNode("Max Temperature: "+max);
             para2.append(maxText);
             newDiv.append(para2);
 
             // min 
 
-            let min = Math.round((weather.temp_min-273)+32*(9/5));
+            let min = Math.round((weather.temp_min-273)*(9/5)+32);
             let minText = document.createTextNode("Min Temperature: "+min);
             para3.append(minText);
             newDiv.append(para3);
